@@ -20,7 +20,7 @@ namespace winform_app
 
         private void AgregarArticulo_Load(object sender, EventArgs e)
         {
-            //Revisar si esto se usa
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
