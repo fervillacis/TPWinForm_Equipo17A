@@ -21,6 +21,10 @@ namespace winform_app
 
         private void frmAgregarArticulo_Load(object sender, EventArgs e)
         {
+            MarcaNegocio marca = new MarcaNegocio();
+            CategoriaNegocio categoria = new CategoriaNegocio();
+            cboCategoria.DataSource = categoria.listarCategorias();
+            cboMarca.DataSource = marca.listarMarcas();
 
         }
 
@@ -39,6 +43,8 @@ namespace winform_app
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.Marca = (Marca)cboMarca.SelectedItem;
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
 
                 //HACER LAS FUNCIONES EN ARTICULONEGOCIO PARA AGREGAR A LA DB   
                 negocio.agregar(articulo);
