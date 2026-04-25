@@ -14,16 +14,9 @@ namespace winform_app
 {
     public partial class frmAgregarArticulo : Form
     {
-        Articulo articulo = null;
         public frmAgregarArticulo()
         {
             InitializeComponent();
-        }
-        public frmAgregarArticulo(Articulo articulo) 
-        {
-            //Llamar este constructor para el boton modificar
-            InitializeComponent();
-            this.articulo = articulo;
         }
 
         private void frmAgregarArticulo_Load(object sender, EventArgs e)
@@ -31,22 +24,8 @@ namespace winform_app
             MarcaNegocio marca = new MarcaNegocio();
             CategoriaNegocio categoria = new CategoriaNegocio();
             cboCategoria.DataSource = categoria.listarCategorias();
-            cboCategoria.ValueMember = "Id";
-            cboCategoria.DisplayMember = "Descripcion";
             cboMarca.DataSource = marca.listarMarcas();
-            cboMarca.ValueMember = "Id";
-            cboMarca.DisplayMember = "Descripcion";
 
-
-            if (articulo != null)
-            {
-                txtCodigo.Text = articulo.Codigo;
-                txtNombre.Text = articulo.Nombre;
-                txtDescripcion.Text = articulo.Descripcion;
-                txtPrecio.Text = articulo.Precio.ToString();
-                cboMarca.SelectedValue = articulo.Marca.Id;
-                cboCategoria.SelectedValue = articulo.Categoria.Id;
-            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
