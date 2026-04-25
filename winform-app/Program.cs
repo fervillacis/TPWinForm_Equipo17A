@@ -16,7 +16,7 @@ namespace winform_app
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new frmAgregarArticulo()); //cambio para probar la pantalla, tiene que iniciar en la principal
         }
     }
 }
