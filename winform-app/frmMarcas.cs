@@ -16,5 +16,27 @@ namespace winform_app
         {
             InitializeComponent();
         }
+
+        private void dgvMarcas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnAgregarMarcas_Click(object sender, EventArgs e)
+        {
+            frmAgregarMarca agregarMarca = new frmAgregarMarca();
+            agregarMarca.ShowDialog();
+        }
+
+        private void btnModificarMarcas_Click(object sender, EventArgs e)
+        {
+            frmAgregarMarca agregarMarca = new frmAgregarMarca();
+            agregarMarca.ShowDialog();
+        }
+
+        private void btnEliminarMarcas_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
