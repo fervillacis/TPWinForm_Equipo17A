@@ -41,7 +41,6 @@
             this.txtDescripcionMarca.Name = "txtDescripcionMarca";
             this.txtDescripcionMarca.Size = new System.Drawing.Size(176, 22);
             this.txtDescripcionMarca.TabIndex = 11;
-            this.txtDescripcionMarca.TextChanged += new System.EventHandler(this.txtDescripcionMarca_TextChanged);
             // 
             // lblDescripcionMarca
             // 
@@ -52,7 +51,6 @@
             this.lblDescripcionMarca.Size = new System.Drawing.Size(79, 16);
             this.lblDescripcionMarca.TabIndex = 10;
             this.lblDescripcionMarca.Text = "Descripcion";
-            this.lblDescripcionMarca.Click += new System.EventHandler(this.lblDescripcionMarca_Click);
             // 
             // btnCancelarMarca
             // 
@@ -87,6 +85,7 @@
             this.Controls.Add(this.btnAceptarMarca);
             this.Name = "frmAgregarMarca";
             this.Text = "frmAgregarMarca";
+            this.Load += new System.EventHandler(this.frmAgregarMarca_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

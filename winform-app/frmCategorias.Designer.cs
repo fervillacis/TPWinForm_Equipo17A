@@ -93,6 +93,7 @@
             this.Controls.Add(this.dgvCategorias);
             this.Name = "frmCategorias";
             this.Text = "frmCategorias";
+            this.Load += new System.EventHandler(this.frmCategorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.ResumeLayout(false);
 

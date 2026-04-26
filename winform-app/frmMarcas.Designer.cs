@@ -93,6 +93,7 @@
             this.Controls.Add(this.dgvMarcas);
             this.Name = "frmMarcas";
             this.Text = "frmMarcas";
+            this.Load += new System.EventHandler(this.frmMarcas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMarcas)).EndInit();
             this.ResumeLayout(false);
 

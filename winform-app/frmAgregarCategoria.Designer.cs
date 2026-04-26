@@ -41,7 +41,6 @@
             this.txtDescripcionCategoria.Name = "txtDescripcionCategoria";
             this.txtDescripcionCategoria.Size = new System.Drawing.Size(176, 22);
             this.txtDescripcionCategoria.TabIndex = 7;
-            this.txtDescripcionCategoria.TextChanged += new System.EventHandler(this.txtDescripcionCategoria_TextChanged);
             // 
             // lblDescripcionCategoria
             // 
@@ -52,7 +51,6 @@
             this.lblDescripcionCategoria.Size = new System.Drawing.Size(79, 16);
             this.lblDescripcionCategoria.TabIndex = 6;
             this.lblDescripcionCategoria.Text = "Descripcion";
-            this.lblDescripcionCategoria.Click += new System.EventHandler(this.lblDescripcionCategoria_Click);
             // 
             // btnCancelarCategoria
             // 
@@ -87,6 +85,7 @@
             this.Controls.Add(this.btnAceptarCategoria);
             this.Name = "frmAgregarCategoria";
             this.Text = "frmAgregarCategoria";
+            this.Load += new System.EventHandler(this.frmAgregarCategoria_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

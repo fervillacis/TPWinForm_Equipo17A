@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Negocio;
+using Dominio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,17 @@ namespace winform_app
 {
     public partial class frmAgregarMarca : Form
     {
+        Marca marca = null;
+
         public frmAgregarMarca()
         {
             InitializeComponent();
+        }
+        public frmAgregarMarca(Marca marca)
+        {
+            InitializeComponent();
+            this.marca = marca;
+            Text = "Modificar marca";
         }
 
         private void btnCancelarMarca_Click(object sender, EventArgs e)
@@ -22,18 +32,46 @@ namespace winform_app
             Close();
         }
 
-        private void lblDescripcionMarca_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDescripcionMarca_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnAceptarMarca_Click(object sender, EventArgs e)
         {
+            MarcaNegocio negocio = new MarcaNegocio();
+            try
+            {
+                if (marca == null)
+                {
+                    marca = new Marca();
+                }
+                marca.Descripcion = txtDescripcionMarca.Text;
+
+                if (marca.Id != 0)
+                {
+                    negocio.modificar(marca);
+                    MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                {
+                    negocio.agregar(marca);
+                    MessageBox.Show("Agregado exitosamente");
+                }
+            Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private void frmAgregarMarca_Load(object sender, EventArgs e)
+        {
+
+
+            if (marca != null)
+            {
+                txtDescripcionMarca.Text = marca.Descripcion;
+            }
 
         }
     }
