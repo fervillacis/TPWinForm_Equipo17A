@@ -7,14 +7,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dominio;
+using Negocio;
 
 namespace winform_app
 {
     public partial class frmArticulos : Form
     {
+        private List<Articulo> listaArticulos;
+
         public frmArticulos()
         {
             InitializeComponent();
+            this.Load += frmArticulos_Load; // cuando el formulario se abre se ejecuta el metodo
+        }
+
+        //   CARGAR
+        private void cargar() // carga y muestra los datos en el DataGridView
+        {
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                listaArticulos = negocio.listar();
+
+                dgvArticulos.DataSource = null; // limpia para que no quede info vieja
+                dgvArticulos.DataSource = listaArticulos; // muestra lo que hay en el objeto listaArticulos
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
+
+
+        private void frmArticulos_Load(object sender, EventArgs e)
+        {
+            cargar();
         }
 
         private void lblFiltro_Click(object sender, EventArgs e)
@@ -32,21 +62,39 @@ namespace winform_app
 
         }
 
+        //    Agregar Articulo
         private void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
             frmAgregarArticulo agregarArticulo = new frmAgregarArticulo();
             agregarArticulo.ShowDialog();
+            cargar(); // recarga para ver lo que se agrego
         }
 
+        //     Modificar Articulo 
         private void btnModificarArticulo_Click(object sender, EventArgs e)
         {
-            frmAgregarArticulo agregarArticulo = new frmAgregarArticulo();
-            agregarArticulo.ShowDialog();
-        }
 
+        }
+           
+        
+        //   Eliminar Articulo   
         private void btnEliminarArticulo_Click(object sender, EventArgs e)
         {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
+            var resp = MessageBox.Show(
+                "¿Eliminar el artículo seleccionado?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (resp == DialogResult.Yes)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                negocio.eliminar(seleccionado.Id);
+                cargar();
+            }
         }
 
         private void btnDetallesArticulos_Click(object sender, EventArgs e)
