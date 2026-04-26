@@ -32,6 +32,7 @@ namespace winform_app
 
                 dgvArticulos.DataSource = null; // limpia para que no quede info vieja
                 dgvArticulos.DataSource = listaArticulos; // muestra lo que hay en el objeto listaArticulos
+                dgvArticulos.Columns["Id"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -73,7 +74,15 @@ namespace winform_app
         //     Modificar Articulo 
         private void btnModificarArticulo_Click(object sender, EventArgs e)
         {
-
+            Articulo seleccionado;
+            if (dgvArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un articulo");
+                return;
+            }
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAgregarArticulo modificar = new frmAgregarArticulo(seleccionado);
+            modificar.ShowDialog();
         }
            
         

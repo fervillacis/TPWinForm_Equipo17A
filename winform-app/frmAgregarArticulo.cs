@@ -25,6 +25,7 @@ namespace winform_app
             //Llamar este constructor para el boton modificar
             InitializeComponent();
             this.articulo = articulo;
+            Text = "Modificar articulo";
         }
 
         private void frmAgregarArticulo_Load(object sender, EventArgs e)
@@ -50,93 +51,34 @@ namespace winform_app
             }
         }
 
-        private void lblCodigoAgregarArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCodigoAgregarArticulo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNombreAgregarArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtNombreAgregarArticulo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDescripcionAgregarArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDescripcionAgregarArticulo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPrecioAgregarArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPrecioAgregarArticulo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblUrlImagenAgregarArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtUrlImagenAgregarArticulo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCategoriaAgregarArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboCategoriasAgregarArticulo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblMarcasAgregarArticulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboMarcasAgregarArticulo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnAceptarArticuloAgregarArticulo_Click(object sender, EventArgs e)
             {
-                Articulo articulo = new Articulo();
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 try
                 {
+                if (articulo == null)
+                {
+                    articulo=new Articulo();
+                }
                     articulo.Codigo = txtCodigoAgregarArticulo.Text;
                     articulo.Nombre = txtNombreAgregarArticulo.Text;
                     articulo.Descripcion = txtDescripcionAgregarArticulo.Text;
                     articulo.Precio = decimal.Parse(txtPrecioAgregarArticulo.Text);
                     articulo.Marca = (Marca)cboMarcasAgregarArticulo.SelectedItem;
                     articulo.Categoria = (Categoria)cboCategoriasAgregarArticulo.SelectedItem;
-
-                    //HACER LAS FUNCIONES EN ARTICULONEGOCIO PARA AGREGAR A LA DB   
+                if (articulo.Id != 0)
+                {
+                    negocio.modificar(articulo);
+                    MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                {
                     negocio.agregar(articulo);
-                    MessageBox.Show("Agregado exítosamente");
-                    Close();
+                    MessageBox.Show("Agregado exitosamente");
+                }
+
+                Close();
 
                 }
                 catch (Exception ex)

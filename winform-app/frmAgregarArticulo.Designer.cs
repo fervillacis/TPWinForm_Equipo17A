@@ -92,7 +92,6 @@
             this.lblMarcasAgregarArticulo.Size = new System.Drawing.Size(45, 16);
             this.lblMarcasAgregarArticulo.TabIndex = 34;
             this.lblMarcasAgregarArticulo.Text = "Marca";
-            this.lblMarcasAgregarArticulo.Click += new System.EventHandler(this.lblMarcasAgregarArticulo_Click);
             // 
             // lblCategoriaAgregarArticulo
             // 
@@ -103,7 +102,6 @@
             this.lblCategoriaAgregarArticulo.Size = new System.Drawing.Size(66, 16);
             this.lblCategoriaAgregarArticulo.TabIndex = 33;
             this.lblCategoriaAgregarArticulo.Text = "Categoría";
-            this.lblCategoriaAgregarArticulo.Click += new System.EventHandler(this.lblCategoriaAgregarArticulo_Click);
             // 
             // lblUrlImagenAgregarArticulo
             // 
@@ -114,7 +112,6 @@
             this.lblUrlImagenAgregarArticulo.Size = new System.Drawing.Size(72, 16);
             this.lblUrlImagenAgregarArticulo.TabIndex = 32;
             this.lblUrlImagenAgregarArticulo.Text = "Url Imagen";
-            this.lblUrlImagenAgregarArticulo.Click += new System.EventHandler(this.lblUrlImagenAgregarArticulo_Click);
             // 
             // lblPrecioAgregarArticulo
             // 
@@ -125,7 +122,6 @@
             this.lblPrecioAgregarArticulo.Size = new System.Drawing.Size(46, 16);
             this.lblPrecioAgregarArticulo.TabIndex = 31;
             this.lblPrecioAgregarArticulo.Text = "Precio";
-            this.lblPrecioAgregarArticulo.Click += new System.EventHandler(this.lblPrecioAgregarArticulo_Click);
             // 
             // lblDescripcionAgregarArticulo
             // 
@@ -136,7 +132,6 @@
             this.lblDescripcionAgregarArticulo.Size = new System.Drawing.Size(79, 16);
             this.lblDescripcionAgregarArticulo.TabIndex = 30;
             this.lblDescripcionAgregarArticulo.Text = "Descripción";
-            this.lblDescripcionAgregarArticulo.Click += new System.EventHandler(this.lblDescripcionAgregarArticulo_Click);
             // 
             // lblNombreAgregarArticulo
             // 
@@ -147,7 +142,6 @@
             this.lblNombreAgregarArticulo.Size = new System.Drawing.Size(56, 16);
             this.lblNombreAgregarArticulo.TabIndex = 29;
             this.lblNombreAgregarArticulo.Text = "Nombre";
-            this.lblNombreAgregarArticulo.Click += new System.EventHandler(this.lblNombreAgregarArticulo_Click);
             // 
             // lblCodigoAgregarArticulo
             // 
@@ -158,7 +152,6 @@
             this.lblCodigoAgregarArticulo.Size = new System.Drawing.Size(51, 16);
             this.lblCodigoAgregarArticulo.TabIndex = 28;
             this.lblCodigoAgregarArticulo.Text = "Código";
-            this.lblCodigoAgregarArticulo.Click += new System.EventHandler(this.lblCodigoAgregarArticulo_Click);
             // 
             // cboMarcasAgregarArticulo
             // 
@@ -169,7 +162,6 @@
             this.cboMarcasAgregarArticulo.Name = "cboMarcasAgregarArticulo";
             this.cboMarcasAgregarArticulo.Size = new System.Drawing.Size(160, 24);
             this.cboMarcasAgregarArticulo.TabIndex = 27;
-            this.cboMarcasAgregarArticulo.SelectedIndexChanged += new System.EventHandler(this.cboMarcasAgregarArticulo_SelectedIndexChanged);
             // 
             // cboCategoriasAgregarArticulo
             // 
@@ -180,7 +172,6 @@
             this.cboCategoriasAgregarArticulo.Name = "cboCategoriasAgregarArticulo";
             this.cboCategoriasAgregarArticulo.Size = new System.Drawing.Size(160, 24);
             this.cboCategoriasAgregarArticulo.TabIndex = 26;
-            this.cboCategoriasAgregarArticulo.SelectedIndexChanged += new System.EventHandler(this.cboCategoriasAgregarArticulo_SelectedIndexChanged);
             // 
             // txtUrlImagenAgregarArticulo
             // 
@@ -189,7 +180,6 @@
             this.txtUrlImagenAgregarArticulo.Name = "txtUrlImagenAgregarArticulo";
             this.txtUrlImagenAgregarArticulo.Size = new System.Drawing.Size(160, 22);
             this.txtUrlImagenAgregarArticulo.TabIndex = 25;
-            this.txtUrlImagenAgregarArticulo.TextChanged += new System.EventHandler(this.txtUrlImagenAgregarArticulo_TextChanged);
             // 
             // txtPrecioAgregarArticulo
             // 
@@ -198,7 +188,6 @@
             this.txtPrecioAgregarArticulo.Name = "txtPrecioAgregarArticulo";
             this.txtPrecioAgregarArticulo.Size = new System.Drawing.Size(160, 22);
             this.txtPrecioAgregarArticulo.TabIndex = 24;
-            this.txtPrecioAgregarArticulo.TextChanged += new System.EventHandler(this.txtPrecioAgregarArticulo_TextChanged);
             // 
             // txtDescripcionAgregarArticulo
             // 
@@ -207,7 +196,6 @@
             this.txtDescripcionAgregarArticulo.Name = "txtDescripcionAgregarArticulo";
             this.txtDescripcionAgregarArticulo.Size = new System.Drawing.Size(160, 22);
             this.txtDescripcionAgregarArticulo.TabIndex = 23;
-            this.txtDescripcionAgregarArticulo.TextChanged += new System.EventHandler(this.txtDescripcionAgregarArticulo_TextChanged);
             // 
             // txtNombreAgregarArticulo
             // 
@@ -216,7 +204,6 @@
             this.txtNombreAgregarArticulo.Name = "txtNombreAgregarArticulo";
             this.txtNombreAgregarArticulo.Size = new System.Drawing.Size(160, 22);
             this.txtNombreAgregarArticulo.TabIndex = 22;
-            this.txtNombreAgregarArticulo.TextChanged += new System.EventHandler(this.txtNombreAgregarArticulo_TextChanged);
             // 
             // txtCodigoAgregarArticulo
             // 
@@ -225,7 +212,6 @@
             this.txtCodigoAgregarArticulo.Name = "txtCodigoAgregarArticulo";
             this.txtCodigoAgregarArticulo.Size = new System.Drawing.Size(160, 22);
             this.txtCodigoAgregarArticulo.TabIndex = 21;
-            this.txtCodigoAgregarArticulo.TextChanged += new System.EventHandler(this.txtCodigoAgregarArticulo_TextChanged);
             // 
             // btnCancelarArticuloAgregarArticulo
             // 
