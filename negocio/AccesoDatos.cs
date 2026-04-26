@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
+//using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 using Negocio;
 
 namespace Negocio
@@ -21,7 +22,8 @@ namespace Negocio
 
         public AccesoDatos() //consturctor de AccesoDatos, inicializa la conexion y el comando.
         {
-            conexion = new SqlConnection("server=(localdb)\\MSSQLLocalDB;");
+            //conexion = new SqlConnection("server=(localdb)\\MSSQLLocalDB;");
+            conexion = new SqlConnection("server=localhost,1433; database=CATALOGO_P3_DB; user id=sa; password=Clave123!; TrustServerCertificate=True;");
             comando = new SqlCommand();
         }
 

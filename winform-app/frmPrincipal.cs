@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dominio;
+using Negocio;
 
 namespace winform_app
 {
@@ -56,6 +58,32 @@ namespace winform_app
             }
             ventana.MdiParent = this;
             ventana.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            try
+            {
+                List<Articulo> lista = negocio.listar();
+
+                string resultado = "";
+
+                foreach (Articulo item in lista)
+                {
+                    resultado += item.Codigo + " - " + item.Nombre + " - "
+                              + item.Marca.Descripcion + " - "
+                              + item.Categoria.Descripcion + " - $"
+                              + item.Precio + "\n";
+                }
+
+                MessageBox.Show(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     }
 }

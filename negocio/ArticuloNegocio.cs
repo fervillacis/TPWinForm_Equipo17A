@@ -12,7 +12,7 @@ namespace Negocio
     {
         private AccesoDatos datos = new AccesoDatos();
 
-
+        //    AGREGAR
         public void agregar(Articulo nuevo)
         {
             try
@@ -36,6 +36,7 @@ namespace Negocio
             finally { datos.cerrarConexion(); }
         }
 
+        //     MODIFICAR
         public void modificar(Articulo modificar)
         {
             try
@@ -60,5 +61,52 @@ namespace Negocio
             finally { datos.cerrarConexion(); }
         }
 
+        //     LISTAR
+        public List<Articulo> listar()
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion,A.Precio, A.IdCategoria, A.IdMarca, C.Descripcion AS Categoria, M.Descripcion AS Marca FROM ARTICULOS AS A INNER JOIN CATEGORIAS AS C ON A.IdCategoria = C.Id INNER JOIN MARCAS AS M ON A.IdMarca = M.Id;");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+
+                    if (!(datos.Lector.IsDBNull(datos.Lector.GetOrdinal("Precio"))))
+                        aux.Precio = (decimal)datos.Lector["Precio"];
+
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
