@@ -67,6 +67,7 @@ namespace winform_app
                     articulo.Precio = decimal.Parse(txtPrecioAgregarArticulo.Text);
                     articulo.Marca = (Marca)cboMarcasAgregarArticulo.SelectedItem;
                     articulo.Categoria = (Categoria)cboCategoriasAgregarArticulo.SelectedItem;
+                    articulo.ImagenUrl = txtUrlImagenAgregarArticulo.Text;
                 if (articulo.Id != 0)
                 {
                     negocio.modificar(articulo);

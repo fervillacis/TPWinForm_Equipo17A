@@ -15,6 +15,9 @@ namespace winform_app
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulos;
+        private List<Imagen> listaImagenes;
+        private int indiceImagenActual = 0;
+
 
         public frmArticulos()
         {
@@ -116,13 +119,54 @@ namespace winform_app
 
         }
 
+        private void mostrarImagenActual()
+        {
+            if (listaImagenes != null && listaImagenes.Count > 0)
+            {
+                try
+                {
+                    pictureBox1.Load(listaImagenes[indiceImagenActual].ImagenUrl);
+                }
+
+                catch (Exception ex)
+                {
+                    pictureBox1.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+                }
+            }
+            else
+            {
+                pictureBox1.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+            }
+        }
+
+
         private void btnAnteriorArticulo_Click(object sender, EventArgs e)
         {
+            if (listaImagenes != null && indiceImagenActual > 0)
+            {
+                indiceImagenActual--;
+                mostrarImagenActual();
+            }
+            else if (listaImagenes != null && indiceImagenActual == 0)
+            {
+                indiceImagenActual = listaImagenes.Count - 1;
+                mostrarImagenActual();
+            }
 
         }
 
         private void btnSiguienteArticulo_Click(object sender, EventArgs e)
         {
+            if (listaImagenes != null && indiceImagenActual < listaImagenes.Count - 1)
+            {
+                indiceImagenActual++;
+                mostrarImagenActual();
+            }
+            else if (listaImagenes != null && indiceImagenActual == listaImagenes.Count - 1)
+            {
+                indiceImagenActual = 0;
+                mostrarImagenActual();
+            }
 
         }
 
