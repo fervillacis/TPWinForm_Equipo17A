@@ -58,7 +58,28 @@ namespace winform_app
 
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
+            string filtro = txtFiltroArticuloTop.Text.ToUpper();
 
+            if (filtro.Length >= 2)
+            {
+                List<Articulo> listaFiltrada = listaArticulos.FindAll(x =>
+                    x.Codigo.ToUpper().Contains(filtro) ||
+                    x.Nombre.ToUpper().Contains(filtro) ||
+                    x.Descripcion.ToUpper().Contains(filtro) ||
+                    x.Marca.Descripcion.ToUpper().Contains(filtro) ||
+                    x.Categoria.Descripcion.ToUpper().Contains(filtro)
+                );
+
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = listaFiltrada;
+            }
+            else
+            {
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = listaArticulos;
+            }
+
+       
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -201,6 +222,11 @@ namespace winform_app
         }
 
         private void btnArticuloBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

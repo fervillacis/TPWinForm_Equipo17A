@@ -23,7 +23,8 @@ namespace Negocio
         public AccesoDatos() //consturctor de AccesoDatos, inicializa la conexion y el comando.
         {
             //conexion = new SqlConnection("server=(localdb)\\MSSQLLocalDB;");
-            conexion = new SqlConnection("Server=(localdb)\\MSSQLLocalDB; Database=CATALOGO_P3_DB; Integrated Security=True");
+            //conexion = new SqlConnection("Server=(localdb)\\MSSQLLocalDB; Database=CATALOGO_P3_DB; Integrated Security=True");
+            conexion = new SqlConnection("server=localhost,1433; database=CATALOGO_P3_DB; user id=sa; password=Clave123!; TrustServerCertificate=True;");
             comando = new SqlCommand();
         }
 
