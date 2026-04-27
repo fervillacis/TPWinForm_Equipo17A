@@ -132,7 +132,10 @@ namespace winform_app
 
         private void btnDetallesArticulos_Click(object sender, EventArgs e)
         {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
+            frmDetallesArticulo detalles = new frmDetallesArticulo(seleccionado);
+            detalles.ShowDialog();
         }
 
         private void btnLimpiarArticulo_Click(object sender, EventArgs e)
