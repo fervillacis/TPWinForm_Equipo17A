@@ -22,23 +22,6 @@ namespace winform_app
         }
 
 
-        private void btnEliminarArticulo_Click(object sender, EventArgs e)
-        {
-            Categoria seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
-
-            var resp = MessageBox.Show(
-                "¿Eliminar la marca seleccionada?",
-                "Confirmar eliminación",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
-
-            if (resp == DialogResult.Yes)
-            {
-                CategoriaNegocio negocio = new CategoriaNegocio();
-                negocio.eliminar(seleccionado.Id);
-            }
-        }
 
         private void btnModificarArticulo_Click(object sender, EventArgs e)
         {
@@ -63,6 +46,35 @@ namespace winform_app
         {
 
         }
+        private void btnEliminarArticulo_Click(object sender, EventArgs e)
+        {
+            Categoria seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
+            CategoriaNegocio negocio = new CategoriaNegocio();
+
+            if (negocio.validarEliminarCategoria(seleccionado.Id))
+            {
+                MessageBox.Show(
+                "No se puede eliminar la categoria porque está asociada a uno o más artículos.",
+                "Eliminación no permitida",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+
+                return;
+            }
+            var resp = MessageBox.Show(
+                "¿Eliminar la aategoria seleccionada?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (resp == DialogResult.Yes)
+            {
+                negocio.eliminar(seleccionado.Id);
+                MessageBox.Show("Categoria eliminada correctamente.");
+            }
+        }
 
         private void frmCategorias_Load(object sender, EventArgs e)
         {
@@ -71,7 +83,7 @@ namespace winform_app
                 CategoriaNegocio marca = new CategoriaNegocio();
                 listaCategorias = marca.listarCategorias();
 
-                dgvCategorias.DataSource = null; 
+                dgvCategorias.DataSource = null;
                 dgvCategorias.DataSource = listaCategorias;
                 dgvCategorias.Columns["Id"].Visible = false;
             }
