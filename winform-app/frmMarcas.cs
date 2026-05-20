@@ -47,6 +47,20 @@ namespace winform_app
         private void btnEliminarMarcas_Click(object sender, EventArgs e)
         {
             Marca seleccionado = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
+            MarcaNegocio negocio = new MarcaNegocio();
+
+
+            if (negocio.validarEliminarMarca(seleccionado.Id))
+            {
+                MessageBox.Show(
+                    "No se puede eliminar la marca porque está asociada a uno o más artículos.",
+                    "Eliminación no permitida",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
+                return;
+            }
 
             var resp = MessageBox.Show(
                 "¿Eliminar la marca seleccionada?",
@@ -57,8 +71,8 @@ namespace winform_app
 
             if (resp == DialogResult.Yes)
             {
-                MarcaNegocio negocio = new MarcaNegocio();
                 negocio.eliminar(seleccionado.Id);
+                MessageBox.Show("Marca eliminada correctamente");
             }
         }
 
