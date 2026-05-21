@@ -34,12 +34,14 @@ namespace winform_app
             seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
             frmAgregarCategoria modificar = new frmAgregarCategoria(seleccionado);
             modificar.ShowDialog();
+            cargarCategorias();
         }
 
         private void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
             frmAgregarCategoria agregarCategoria = new frmAgregarCategoria();
             agregarCategoria.ShowDialog();
+            cargarCategorias();
         }
 
         private void dgvCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -74,9 +76,9 @@ namespace winform_app
                 negocio.eliminar(seleccionado.Id);
                 MessageBox.Show("Categoria eliminada correctamente.");
             }
+            cargarCategorias();
         }
-
-        private void frmCategorias_Load(object sender, EventArgs e)
+        private void cargarCategorias()
         {
             try
             {
@@ -91,6 +93,10 @@ namespace winform_app
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+        private void frmCategorias_Load(object sender, EventArgs e)
+        {
+            cargarCategorias();
         }
     }
 }

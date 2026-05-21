@@ -29,6 +29,8 @@ namespace winform_app
         {
             frmAgregarMarca agregarMarca = new frmAgregarMarca();
             agregarMarca.ShowDialog();
+            cargarMarcas();
+
         }
 
         private void btnModificarMarcas_Click(object sender, EventArgs e)
@@ -42,6 +44,8 @@ namespace winform_app
             seleccionado = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
             frmAgregarMarca modificar = new frmAgregarMarca(seleccionado);
             modificar.ShowDialog();
+            cargarMarcas();
+
         }
 
         private void btnEliminarMarcas_Click(object sender, EventArgs e)
@@ -74,23 +78,28 @@ namespace winform_app
                 negocio.eliminar(seleccionado.Id);
                 MessageBox.Show("Marca eliminada correctamente");
             }
-        }
+            cargarMarcas();
 
-        private void frmMarcas_Load(object sender, EventArgs e)
+        }
+        private void cargarMarcas()
         {
             try
             {
                 MarcaNegocio marca = new MarcaNegocio();
                 listaMarcas = marca.listarMarcas();
 
-                dgvMarcas.DataSource = null; 
-                dgvMarcas.DataSource = listaMarcas; 
+                dgvMarcas.DataSource = null;
+                dgvMarcas.DataSource = listaMarcas;
                 dgvMarcas.Columns["Id"].Visible = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+        private void frmMarcas_Load(object sender, EventArgs e)
+        {
+            cargarMarcas();
         }
     }
 }
