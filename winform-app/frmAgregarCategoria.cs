@@ -16,6 +16,7 @@ namespace winform_app
     public partial class frmAgregarCategoria : Form
     {
         Categoria categoria = null;
+        CategoriaNegocio negocio = new CategoriaNegocio();
 
 
         public frmAgregarCategoria()
@@ -30,9 +31,29 @@ namespace winform_app
         }
 
 
+        private bool validarNombreCategoria()
+        {
+            List<Categoria> lista = negocio.listarCategorias();
+
+            if (string.IsNullOrEmpty(txtDescripcionCategoria.Text))
+            {
+                MessageBox.Show("Ingrese una descripción");
+                return false;
+            }
+
+            foreach (Categoria cat in lista)
+            {
+                if (cat.Descripcion.ToLower() == txtDescripcionCategoria.Text.ToLower())
+                {
+                    MessageBox.Show("La categoría ya existe");
+                    return false;
+                }
+            }
+
+            return true;
+        }
         private void btnAceptarCategoria_Click(object sender, EventArgs e)
         {
-            CategoriaNegocio negocio = new CategoriaNegocio();
             try
             {
                 if (categoria == null)
@@ -41,17 +62,21 @@ namespace winform_app
                 }
                 categoria.Descripcion = txtDescripcionCategoria.Text;
 
-                if (categoria.Id != 0)
+                if (validarNombreCategoria())
                 {
-                    negocio.modificar(categoria);
-                    MessageBox.Show("Modificado exitosamente");
+                    if (categoria.Id != 0)
+                    {
+                        negocio.modificar(categoria);
+                        MessageBox.Show("Modificado exitosamente");
+                    }
+                    else
+                    {
+                        negocio.agregar(categoria);
+                        MessageBox.Show("Agregado exitosamente");
+                    }
+                    Close();
                 }
-                else
-                {
-                    negocio.agregar(categoria);
-                    MessageBox.Show("Agregado exitosamente");
-                }
-                Close();
+
 
             }
             catch (Exception ex)
@@ -61,7 +86,6 @@ namespace winform_app
             }
 
         }
-
         private void btnCancelarCategoria_Click(object sender, EventArgs e)
         {
             Close();

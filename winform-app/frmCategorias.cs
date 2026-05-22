@@ -28,7 +28,7 @@ namespace winform_app
             Categoria seleccionado;
             if (dgvCategorias.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un articulo");
+                MessageBox.Show("Seleccione una categoria");
                 return;
             }
             seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
@@ -50,9 +50,13 @@ namespace winform_app
         }
         private void btnEliminarArticulo_Click(object sender, EventArgs e)
         {
-            Categoria seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
             CategoriaNegocio negocio = new CategoriaNegocio();
-
+            if (dgvCategorias.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione una categoria");
+                return;
+            }
+            Categoria seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
             if (negocio.validarEliminarCategoria(seleccionado.Id))
             {
                 MessageBox.Show(
@@ -65,7 +69,7 @@ namespace winform_app
                 return;
             }
             var resp = MessageBox.Show(
-                "¿Eliminar la aategoria seleccionada?",
+                "¿Eliminar la categoria seleccionada?",
                 "Confirmar eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning

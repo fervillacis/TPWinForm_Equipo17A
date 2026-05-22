@@ -38,7 +38,7 @@ namespace winform_app
             Marca seleccionado;
             if (dgvMarcas.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un articulo");
+                MessageBox.Show("Seleccione una marca");
                 return;
             }
             seleccionado = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
@@ -50,10 +50,13 @@ namespace winform_app
 
         private void btnEliminarMarcas_Click(object sender, EventArgs e)
         {
-            Marca seleccionado = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
             MarcaNegocio negocio = new MarcaNegocio();
-
-
+            if (dgvMarcas.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione una marca");
+                return;
+            }
+            Marca seleccionado = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
             if (negocio.validarEliminarMarca(seleccionado.Id))
             {
                 MessageBox.Show(

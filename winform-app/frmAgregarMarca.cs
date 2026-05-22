@@ -15,6 +15,7 @@ namespace winform_app
     public partial class frmAgregarMarca : Form
     {
         Marca marca = null;
+        MarcaNegocio negocio = new MarcaNegocio();
 
         public frmAgregarMarca()
         {
@@ -33,9 +34,30 @@ namespace winform_app
         }
 
 
+        private bool validarNombreMarca()
+        {
+            List<Marca> lista = negocio.listarMarcas();
+
+            if (string.IsNullOrEmpty(txtDescripcionMarca.Text))
+            {
+                MessageBox.Show("Ingrese una descripción");
+                return false;
+            }
+
+            foreach (Marca marca in lista)
+            {
+                if (marca.Descripcion.ToLower() == txtDescripcionMarca.Text.ToLower())
+                {
+                    MessageBox.Show("La marca ya existe");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         private void btnAceptarMarca_Click(object sender, EventArgs e)
         {
-            MarcaNegocio negocio = new MarcaNegocio();
             try
             {
                 if (marca == null)
@@ -43,18 +65,20 @@ namespace winform_app
                     marca = new Marca();
                 }
                 marca.Descripcion = txtDescripcionMarca.Text;
-
-                if (marca.Id != 0)
+                if (validarNombreMarca())
                 {
-                    negocio.modificar(marca);
-                    MessageBox.Show("Modificado exitosamente");
+                    if (marca.Id != 0)
+                    {
+                        negocio.modificar(marca);
+                        MessageBox.Show("Modificado exitosamente");
+                    }
+                    else
+                    {
+                        negocio.agregar(marca);
+                        MessageBox.Show("Agregado exitosamente");
+                    }
+                    Close();
                 }
-                else
-                {
-                    negocio.agregar(marca);
-                    MessageBox.Show("Agregado exitosamente");
-                }
-            Close();
 
             }
             catch (Exception ex)
@@ -63,7 +87,6 @@ namespace winform_app
                 throw ex;
             }
         }
-
         private void frmAgregarMarca_Load(object sender, EventArgs e)
         {
 
