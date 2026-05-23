@@ -38,7 +38,7 @@ namespace winform_app
             Marca seleccionado;
             if (dgvMarcas.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione una marca");
+                MessageBox.Show("Por favor, elija una marca de la lista para poder llevar a cabo la operación.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             seleccionado = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
@@ -53,7 +53,7 @@ namespace winform_app
             MarcaNegocio negocio = new MarcaNegocio();
             if (dgvMarcas.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione una marca");
+                MessageBox.Show("Por favor, elija una marca de la lista para poder llevar a cabo la operación.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             Marca seleccionado = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
@@ -79,7 +79,7 @@ namespace winform_app
             if (resp == DialogResult.Yes)
             {
                 negocio.eliminar(seleccionado.Id);
-                MessageBox.Show("Marca eliminada correctamente");
+                MessageBox.Show("La marca seleccionada se ha eliminado exitosamente.", "Marca Eliminada", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             cargarMarcas();
 
@@ -95,9 +95,9 @@ namespace winform_app
                 dgvMarcas.DataSource = listaMarcas;
                 dgvMarcas.Columns["Id"].Visible = false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("No se pudo cargar la lista de marcas. Si el problema persiste, contacte al servicio técnico.", "Error de Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void frmMarcas_Load(object sender, EventArgs e)

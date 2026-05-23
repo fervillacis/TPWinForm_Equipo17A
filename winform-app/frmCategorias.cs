@@ -28,7 +28,7 @@ namespace winform_app
             Categoria seleccionado;
             if (dgvCategorias.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione una categoria");
+                MessageBox.Show("Debe seleccionar una categoría de la grilla antes de poder realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
@@ -53,7 +53,7 @@ namespace winform_app
             CategoriaNegocio negocio = new CategoriaNegocio();
             if (dgvCategorias.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione una categoria");
+                MessageBox.Show("Debe seleccionar una categoría de la grilla antes de poder realizar esta acción.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             Categoria seleccionado = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
@@ -78,7 +78,7 @@ namespace winform_app
             if (resp == DialogResult.Yes)
             {
                 negocio.eliminar(seleccionado.Id);
-                MessageBox.Show("Categoria eliminada correctamente.");
+                MessageBox.Show("La categoría seleccionada ha sido removida del sistema de forma correcta.", "Categoría Eliminada", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             cargarCategorias();
         }
@@ -93,9 +93,9 @@ namespace winform_app
                 dgvCategorias.DataSource = listaCategorias;
                 dgvCategorias.Columns["Id"].Visible = false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Ocurrió un inconveniente al intentar cargar la lista de categorías. Intente nuevamente en unos instantes.", "Error al Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void frmCategorias_Load(object sender, EventArgs e)

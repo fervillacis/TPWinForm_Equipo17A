@@ -53,7 +53,7 @@ namespace Negocio
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new ApplicationException("Ocurrió un error al intentar registrar el nuevo artículo en la base de datos.", ex);
             }
             finally { datos.cerrarConexion(); }
         }
@@ -111,7 +111,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Ocurrió un error al intentar modificar los datos del artículo con ID {modificar.Id} en la base de datos.", ex);
 
             }
             finally { datos.cerrarConexion(); }
@@ -160,7 +160,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException("Error al consultar la lista completa de artículos desde la base de datos.", ex);
             }
             finally
             {
@@ -181,7 +181,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al intentar eliminar el artículo con ID {id} de la base de datos.", ex);
             }
             finally { datos.cerrarConexion(); }
         }
@@ -211,7 +211,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al consultar las imágenes asociadas al artículo con ID {idArticulo}.", ex);
             }
             finally
             {
@@ -245,6 +245,34 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw new ApplicationException("Error inesperado al listar imágenes del artículo.", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool existeCodigo(string codigo, int idArticulo = 0)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                // Verifico si existe otro artículo con el mismo código, excluyendo el artículo actual
+                datos.setearConsulta("SELECT COUNT(*) FROM ARTICULOS WHERE Codigo = @Codigo AND Id <> @Id");
+                datos.setearParametro("@Codigo", codigo);
+                datos.setearParametro("@Id", idArticulo);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    int cantidad = Convert.ToInt32(datos.Lector[0]);
+                    return cantidad > 0;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al validar la duplicidad del código en la base de datos.", ex);
             }
             finally
             {

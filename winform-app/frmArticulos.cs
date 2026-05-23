@@ -37,9 +37,9 @@ namespace winform_app
                 dgvArticulos.DataSource = listaArticulos; // muestra lo que hay en el objeto listaArticulos
                 dgvArticulos.Columns["Id"].Visible = false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("No se pudo establecer conexión con la base de datos o hubo un inconveniente al recuperar el catálogo de artículos.", "Error de Conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -101,7 +101,7 @@ namespace winform_app
             Articulo seleccionado;
             if (dgvArticulos.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un articulo");
+                MessageBox.Show("Por favor, seleccione un artículo de la lista antes de proceder a modificarlo.", "Selección Requerida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
@@ -152,7 +152,7 @@ namespace winform_app
                     pictureBox1.Load(listaImagenes[indiceImagenActual].ImagenUrl);
                 }
 
-                catch (Exception ex)
+                catch (Exception)
                 {
                     pictureBox1.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
                 }

@@ -79,10 +79,10 @@ namespace winform_app
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                MessageBox.Show("Ocurrió un error inesperado al procesar la categoría. Por favor, intente de nuevo más tarde.", "Error de Categoría", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

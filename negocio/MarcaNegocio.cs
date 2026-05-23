@@ -34,7 +34,7 @@ namespace Negocio
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new ApplicationException("Error al listar las marcas desde la base de datos.", ex);
             }
 
             finally
@@ -55,7 +55,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al registrar la nueva marca '{nuevo.Descripcion}' en la base de datos.", ex);
 
             }
             finally { datos.cerrarConexion(); }
@@ -73,7 +73,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al intentar modificar la marca '{modificado.Descripcion}' (ID {modificado.Id}).", ex);
 
             }
             finally { datos.cerrarConexion(); }
@@ -92,7 +92,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al intentar eliminar la marca con ID {id} de la base de datos.", ex);
             }
             finally { datos.cerrarConexion(); }
 
@@ -119,7 +119,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al validar dependencias de artículos para la marca con ID {idMarca}.", ex);
             }
             finally
             {

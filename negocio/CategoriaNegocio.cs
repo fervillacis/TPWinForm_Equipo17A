@@ -35,7 +35,7 @@ namespace Negocio
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new ApplicationException("Error al obtener el listado de categorías desde la base de datos.", ex);
             }
             finally
             {
@@ -54,7 +54,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al intentar eliminar la categoría con ID {id} de la base de datos.", ex);
             }
             finally { datos.cerrarConexion(); }
 
@@ -71,7 +71,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al intentar modificar la categoría '{modificado.Descripcion}' (ID {modificado.Id}).", ex);
 
             }
             finally { datos.cerrarConexion(); }
@@ -89,7 +89,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al intentar agregar la categoría '{nuevo.Descripcion}' en la base de datos.", ex);
 
             }
             finally { datos.cerrarConexion(); }
@@ -116,7 +116,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException($"Error al validar dependencias de artículos para la categoría con ID {idCategoria}.", ex);
             }
             finally
             {

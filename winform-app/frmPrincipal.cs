@@ -53,7 +53,7 @@ namespace winform_app
         {
             if(this.ActiveMdiChild != null)
             {
-                MessageBox.Show("Ya existe una ventana abierta. Cierre la ventana actual para abrir una nueva.");
+                MessageBox.Show("Ya hay una sección activa en pantalla. Por favor, ciérrela para poder abrir una nueva ventana de trabajo.", "Sección en Uso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             ventana.MdiParent = this;
@@ -80,9 +80,9 @@ namespace winform_app
 
                 MessageBox.Show(resultado);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Ocurrió un problema inesperado al generar el resumen rápido de artículos.", "Error de Generación", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

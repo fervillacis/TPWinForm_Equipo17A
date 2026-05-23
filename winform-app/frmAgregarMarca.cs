@@ -81,10 +81,10 @@ namespace winform_app
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                MessageBox.Show("Ocurrió un error inesperado al procesar la marca. Por favor, intente de nuevo más tarde.", "Error de Marca", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void frmAgregarMarca_Load(object sender, EventArgs e)
