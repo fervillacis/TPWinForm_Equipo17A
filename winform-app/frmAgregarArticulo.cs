@@ -15,6 +15,10 @@ namespace winform_app
     public partial class frmAgregarArticulo : Form
     {
         Articulo articulo = null;
+        List<string> imagenes = new List<string>();
+        List<string> imagenesNuevas = new List<string>();
+        int indiceImagenActual = 0;
+
         public frmAgregarArticulo()
         {
             InitializeComponent();
@@ -48,6 +52,15 @@ namespace winform_app
                 txtPrecioAgregarArticulo.Text = articulo.Precio.ToString();
                 cboMarcasAgregarArticulo.SelectedValue = articulo.Marca.Id;
                 cboCategoriasAgregarArticulo.SelectedValue = articulo.Categoria.Id;
+
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                imagenes = negocio.ObtenerImagenesPorId(articulo.Id);
+
+                if (imagenes.Count > 0)
+                {
+                    indiceImagenActual = 0;
+                    MostrarImagenActual();
+                }
             }
         }
 
@@ -70,15 +83,47 @@ namespace winform_app
                 articulo.Precio = decimal.Parse(txtPrecioAgregarArticulo.Text);
                 articulo.Marca = (Marca)cboMarcasAgregarArticulo.SelectedItem;
                 articulo.Categoria = (Categoria)cboCategoriasAgregarArticulo.SelectedItem;
-                articulo.ImagenUrl = txtUrlImagenAgregarArticulo.Text.Trim();
+            
                 if (articulo.Id != 0)
                 {
                     negocio.modificar(articulo);
+
+                    if (!string.IsNullOrWhiteSpace(txtUrlImagenAgregarArticulo.Text))
+                    {
+                        string url = txtUrlImagenAgregarArticulo.Text.Trim();
+
+                        if (!imagenes.Contains(url) && !imagenesNuevas.Contains(url))
+                        {
+                            imagenesNuevas.Add(url);
+                        }
+                    }
+
+                    foreach (string imagen in imagenesNuevas)
+                    {
+                        negocio.guardarImagen(articulo.Id, imagen);
+                    }
+
                     MessageBox.Show("El artículo ha sido modificado con éxito.", "Artículo Modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    negocio.agregar(articulo);
+                    int idArticulo = negocio.agregar(articulo);
+
+                    if (!string.IsNullOrWhiteSpace(txtUrlImagenAgregarArticulo.Text))
+                    {
+                        string url = txtUrlImagenAgregarArticulo.Text.Trim();
+
+                        if (!imagenes.Contains(url) && !imagenesNuevas.Contains(url))
+                        {
+                            imagenesNuevas.Add(url);
+                        }
+                    }
+
+                    foreach (string imagen in imagenesNuevas)
+                    {
+                        negocio.guardarImagen(idArticulo, imagen);
+                    }
+
                     MessageBox.Show("El artículo ha sido registrado con éxito.", "Artículo Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 Close();
@@ -101,12 +146,43 @@ namespace winform_app
 
         private void btnAgregarImagenAgregarArticulo_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(txtUrlImagenAgregarArticulo.Text))
+            {
+                imagenesNuevas.Add(txtUrlImagenAgregarArticulo.Text.Trim());
 
+                indiceImagenActual = imagenes.Count + imagenesNuevas.Count - 1;
+                MostrarImagenActual();
+            }
         }
 
         private void btnQuitarImagenAgregarArticulo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MostrarImagenActual()
+        {
+            List<string> todas = new List<string>();
+            todas.AddRange(imagenes);
+            todas.AddRange(imagenesNuevas);
+
+            if (todas.Count > 0)
+            {
+                try
+                {
+                    pbxArticuloAgregarArticulo.Load(todas[indiceImagenActual]);
+                    txtUrlImagenAgregarArticulo.Text = todas[indiceImagenActual];
+                }
+                catch
+                {
+                    pbxArticuloAgregarArticulo.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+                }
+            }
+            else
+            {
+                pbxArticuloAgregarArticulo.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
+                txtUrlImagenAgregarArticulo.Clear();
+            }
         }
 
         private bool validarCampos()

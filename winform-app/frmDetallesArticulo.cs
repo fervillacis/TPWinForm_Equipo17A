@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
+using Negocio;
 
 namespace winform_app
 {
@@ -15,6 +16,8 @@ namespace winform_app
     {
 
         private Articulo articulo;
+        List<string> imagenes = new List<string>();
+        int indiceImagen = 0;
 
         public frmDetallesArticulo(Articulo articulo)
         {
@@ -32,11 +35,14 @@ namespace winform_app
 
             label12.Text = articulo.Precio.ToString();
 
-            try
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            imagenes = negocio.ObtenerImagenesPorId(articulo.Id);
+
+            if (imagenes.Count > 0)
             {
-                pictureBox1.Load(articulo.ImagenUrl);
+                mostrarImagen();
             }
-            catch
+            else
             {
                 pictureBox1.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
             }
@@ -54,5 +60,44 @@ namespace winform_app
         {
 
         }
+        private void mostrarImagen()
+        {
+            try
+            {
+                pictureBox1.Load(imagenes[indiceImagen]);
+            }
+            catch
+            {
+                pictureBox1.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+            }
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            if (imagenes.Count > 0)
+            {
+                indiceImagen--;
+
+                if (indiceImagen < 0)
+                    indiceImagen = imagenes.Count - 1;
+
+                mostrarImagen();
+            }
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            if (imagenes.Count > 0)
+            {
+                indiceImagen++;
+
+                if (indiceImagen >= imagenes.Count)
+                    indiceImagen = 0;
+
+                mostrarImagen();
+            }
+        }
     }
+
+
 }
