@@ -98,10 +98,11 @@ namespace winform_app
                         }
                     }
 
-                    foreach (string imagen in imagenesNuevas)
-                    {
-                        negocio.guardarImagen(articulo.Id, imagen);
-                    }
+                    List<string> todas = new List<string>();
+                    todas.AddRange(imagenes);
+                    todas.AddRange(imagenesNuevas);
+
+                    negocio.guardarImagenes(articulo.Id, todas);
 
                     MessageBox.Show("El artículo ha sido modificado con éxito.", "Artículo Modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -157,7 +158,32 @@ namespace winform_app
 
         private void btnQuitarImagenAgregarArticulo_Click(object sender, EventArgs e)
         {
+            List<string> todas = new List<string>();
+            todas.AddRange(imagenes);
+            todas.AddRange(imagenesNuevas);
 
+            if (todas.Count == 0)
+                return;
+
+            string imagenActual = todas[indiceImagenActual];
+
+            if (imagenes.Contains(imagenActual))
+                imagenes.Remove(imagenActual);
+
+            if (imagenesNuevas.Contains(imagenActual))
+                imagenesNuevas.Remove(imagenActual);
+
+            todas.Clear();
+            todas.AddRange(imagenes);
+            todas.AddRange(imagenesNuevas);
+
+            if (indiceImagenActual >= todas.Count)
+                indiceImagenActual = todas.Count - 1;
+
+            if (indiceImagenActual < 0)
+                indiceImagenActual = 0;
+
+            MostrarImagenActual();
         }
 
         private void MostrarImagenActual()
@@ -229,5 +255,38 @@ namespace winform_app
             return true;
         }
 
+        private void btnAnteriorImagenAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            List<string> todas = new List<string>();
+            todas.AddRange(imagenes);
+            todas.AddRange(imagenesNuevas);
+
+            if (todas.Count == 0)
+                return;
+
+            indiceImagenActual--;
+
+            if (indiceImagenActual < 0)
+                indiceImagenActual = todas.Count - 1;
+
+            MostrarImagenActual();
+        }
+
+        private void btnSiguienteImagenAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            List<string> todas = new List<string>();
+            todas.AddRange(imagenes);
+            todas.AddRange(imagenesNuevas);
+
+            if (todas.Count == 0)
+                return;
+
+            indiceImagenActual++;
+
+            if (indiceImagenActual >= todas.Count)
+                indiceImagenActual = 0;
+
+            MostrarImagenActual();
+        }
     }
 }

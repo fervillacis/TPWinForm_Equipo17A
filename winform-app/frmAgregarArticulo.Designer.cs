@@ -47,15 +47,18 @@
             this.txtCodigoAgregarArticulo = new System.Windows.Forms.TextBox();
             this.btnCancelarArticuloAgregarArticulo = new System.Windows.Forms.Button();
             this.btnAceptarArticuloAgregarArticulo = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnAnteriorImagenAgregarArticulo = new System.Windows.Forms.Button();
+            this.btnSiguienteImagenAgregarArticulo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticuloAgregarArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAgregarImagenAgregarArticulo
             // 
-            this.btnAgregarImagenAgregarArticulo.Location = new System.Drawing.Point(457, 344);
+            this.btnAgregarImagenAgregarArticulo.Location = new System.Drawing.Point(447, 399);
             this.btnAgregarImagenAgregarArticulo.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarImagenAgregarArticulo.Name = "btnAgregarImagenAgregarArticulo";
-            this.btnAgregarImagenAgregarArticulo.Size = new System.Drawing.Size(160, 31);
+            this.btnAgregarImagenAgregarArticulo.Size = new System.Drawing.Size(151, 45);
             this.btnAgregarImagenAgregarArticulo.TabIndex = 37;
             this.btnAgregarImagenAgregarArticulo.Text = "Agregar imagen";
             this.btnAgregarImagenAgregarArticulo.UseVisualStyleBackColor = true;
@@ -63,10 +66,10 @@
             // 
             // btnQuitarImagenAgregarArticulo
             // 
-            this.btnQuitarImagenAgregarArticulo.Location = new System.Drawing.Point(665, 344);
+            this.btnQuitarImagenAgregarArticulo.Location = new System.Drawing.Point(659, 399);
             this.btnQuitarImagenAgregarArticulo.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuitarImagenAgregarArticulo.Name = "btnQuitarImagenAgregarArticulo";
-            this.btnQuitarImagenAgregarArticulo.Size = new System.Drawing.Size(160, 31);
+            this.btnQuitarImagenAgregarArticulo.Size = new System.Drawing.Size(166, 45);
             this.btnQuitarImagenAgregarArticulo.TabIndex = 36;
             this.btnQuitarImagenAgregarArticulo.Text = "Quitar imagen";
             this.btnQuitarImagenAgregarArticulo.UseVisualStyleBackColor = true;
@@ -235,11 +238,43 @@
             this.btnAceptarArticuloAgregarArticulo.UseVisualStyleBackColor = true;
             this.btnAceptarArticuloAgregarArticulo.Click += new System.EventHandler(this.btnAceptarArticuloAgregarArticulo_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 38;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnAnteriorImagenAgregarArticulo
+            // 
+            this.btnAnteriorImagenAgregarArticulo.Location = new System.Drawing.Point(479, 337);
+            this.btnAnteriorImagenAgregarArticulo.Name = "btnAnteriorImagenAgregarArticulo";
+            this.btnAnteriorImagenAgregarArticulo.Size = new System.Drawing.Size(94, 34);
+            this.btnAnteriorImagenAgregarArticulo.TabIndex = 39;
+            this.btnAnteriorImagenAgregarArticulo.Text = "Anterior";
+            this.btnAnteriorImagenAgregarArticulo.UseVisualStyleBackColor = true;
+            this.btnAnteriorImagenAgregarArticulo.Click += new System.EventHandler(this.btnAnteriorImagenAgregarArticulo_Click);
+            // 
+            // btnSiguienteImagenAgregarArticulo
+            // 
+            this.btnSiguienteImagenAgregarArticulo.Location = new System.Drawing.Point(693, 337);
+            this.btnSiguienteImagenAgregarArticulo.Name = "btnSiguienteImagenAgregarArticulo";
+            this.btnSiguienteImagenAgregarArticulo.Size = new System.Drawing.Size(95, 34);
+            this.btnSiguienteImagenAgregarArticulo.TabIndex = 40;
+            this.btnSiguienteImagenAgregarArticulo.Text = "Siguiente";
+            this.btnSiguienteImagenAgregarArticulo.UseVisualStyleBackColor = true;
+            this.btnSiguienteImagenAgregarArticulo.Click += new System.EventHandler(this.btnSiguienteImagenAgregarArticulo_Click);
+            // 
             // frmAgregarArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1077, 540);
+            this.Controls.Add(this.btnSiguienteImagenAgregarArticulo);
+            this.Controls.Add(this.btnAnteriorImagenAgregarArticulo);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAgregarImagenAgregarArticulo);
             this.Controls.Add(this.btnQuitarImagenAgregarArticulo);
             this.Controls.Add(this.pbxArticuloAgregarArticulo);
@@ -289,5 +324,8 @@
         private System.Windows.Forms.TextBox txtCodigoAgregarArticulo;
         private System.Windows.Forms.Button btnCancelarArticuloAgregarArticulo;
         private System.Windows.Forms.Button btnAceptarArticuloAgregarArticulo;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAnteriorImagenAgregarArticulo;
+        private System.Windows.Forms.Button btnSiguienteImagenAgregarArticulo;
     }
 }

@@ -68,6 +68,40 @@ namespace Negocio
             }
         }
 
+        public void guardarImagenes(int idArticulo, List<string> imagenes)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("DELETE FROM IMAGENES WHERE IdArticulo = @IdArticulo");
+                datos.setearParametro("@IdArticulo", idArticulo);
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                foreach (string imagen in imagenes)
+                {
+                    if (!string.IsNullOrWhiteSpace(imagen))
+                    {
+                        AccesoDatos datosImagen = new AccesoDatos();
+                        datosImagen.setearConsulta("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                        datosImagen.setearParametro("@IdArticulo", idArticulo);
+                        datosImagen.setearParametro("@ImagenUrl", imagen);
+                        datosImagen.ejecutarAccion();
+                        datosImagen.cerrarConexion();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
 
         //     MODIFICAR
         public void modificar(Articulo modificar)
@@ -139,6 +173,101 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw new ApplicationException("Error al consultar la lista completa de artículos desde la base de datos.", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Articulo> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, A.IdCategoria, A.IdMarca, I.ImagenUrl, C.Descripcion AS Categoria, M.Descripcion AS Marca FROM ARTICULOS A INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id OUTER APPLY (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id ORDER BY Id) AS I WHERE ";
+
+                if (campo == "Código")
+                {
+                    if (criterio == "Contiene")
+                        consulta += "A.Codigo LIKE '%" + filtro + "%'";
+                    else
+                        consulta += "A.Codigo = '" + filtro + "'";
+                }
+                else if (campo == "Nombre")
+                {
+                    if (criterio == "Contiene")
+                        consulta += "A.Nombre LIKE '%" + filtro + "%'";
+                    else
+                        consulta += "A.Nombre = '" + filtro + "'";
+                }
+                else if (campo == "Descripción")
+                {
+                    if (criterio == "Contiene")
+                        consulta += "A.Descripcion LIKE '%" + filtro + "%'";
+                    else
+                        consulta += "A.Descripcion = '" + filtro + "'";
+                }
+                else if (campo == "Marca")
+                {
+                    if (criterio == "Contiene")
+                        consulta += "M.Descripcion LIKE '%" + filtro + "%'";
+                    else
+                        consulta += "M.Descripcion = '" + filtro + "'";
+                }
+                else if (campo == "Categoría")
+                {
+                    if (criterio == "Contiene")
+                        consulta += "C.Descripcion LIKE '%" + filtro + "%'";
+                    else
+                        consulta += "C.Descripcion = '" + filtro + "'";
+                }
+                else if (campo == "Precio")
+                {
+                    if (criterio == "Mayor a")
+                        consulta += "A.Precio > " + filtro;
+                    else if (criterio == "Menor a")
+                        consulta += "A.Precio < " + filtro;
+                    else
+                        consulta += "A.Precio = " + filtro;
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    if (!(datos.Lector.IsDBNull(datos.Lector.GetOrdinal("Precio"))))
+                        aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    if (!(datos.Lector.IsDBNull(datos.Lector.GetOrdinal("ImagenUrl"))))
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al filtrar artículos.", ex);
             }
             finally
             {

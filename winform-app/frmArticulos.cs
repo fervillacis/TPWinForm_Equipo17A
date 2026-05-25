@@ -36,6 +36,7 @@ namespace winform_app
                 dgvArticulos.DataSource = null; // limpia para que no quede info vieja
                 dgvArticulos.DataSource = listaArticulos; // muestra lo que hay en el objeto listaArticulos
                 dgvArticulos.Columns["Id"].Visible = false;
+                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
             }
             catch (Exception)
             {
@@ -49,6 +50,19 @@ namespace winform_app
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             cargar();
+
+            cboCampoArticulo.Items.Add("Código");
+            cboCampoArticulo.Items.Add("Nombre");
+            cboCampoArticulo.Items.Add("Descripción");
+            cboCampoArticulo.Items.Add("Marca");
+            cboCampoArticulo.Items.Add("Categoría");
+            cboCampoArticulo.Items.Add("Precio");
+
+            cboCriterioArticulo.Items.Add("Contiene");
+            cboCriterioArticulo.Items.Add("Igual a");
+
+            cboCampoArticulo.SelectedIndex = 0;
+            cboCriterioArticulo.SelectedIndex = 0;
         }
 
         private void lblFiltro_Click(object sender, EventArgs e)
@@ -107,6 +121,7 @@ namespace winform_app
             seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmAgregarArticulo modificar = new frmAgregarArticulo(seleccionado);
             modificar.ShowDialog();
+            cargar();
         }
            
         
@@ -196,7 +211,23 @@ namespace winform_app
 
         private void cboCampoArticulo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cboCriterioArticulo.Items.Clear();
 
+            string campo = cboCampoArticulo.SelectedItem.ToString();
+
+            if (campo == "Precio")
+            {
+                cboCriterioArticulo.Items.Add("Mayor a");
+                cboCriterioArticulo.Items.Add("Menor a");
+                cboCriterioArticulo.Items.Add("Igual a");
+            }
+            else
+            {
+                cboCriterioArticulo.Items.Add("Contiene");
+                cboCriterioArticulo.Items.Add("Igual a");
+            }
+
+            cboCriterioArticulo.SelectedIndex = 0;
         }
 
         private void lblCampoArticulo_Click(object sender, EventArgs e)
@@ -226,7 +257,21 @@ namespace winform_app
 
         private void btnArticuloBuscar_Click(object sender, EventArgs e)
         {
+            ArticuloNegocio negocio = new ArticuloNegocio();
 
+            string campo = cboCampoArticulo.SelectedItem.ToString();
+            string criterio = cboCriterioArticulo.SelectedItem.ToString();
+            string filtro = txtFiltroArticulo.Text;
+
+            if (string.IsNullOrWhiteSpace(filtro))
+            {
+                MessageBox.Show("Ingrese un valor para filtrar.", "Filtro vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+            dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

@@ -43,9 +43,9 @@
             this.txtFiltroArticulo = new System.Windows.Forms.TextBox();
             this.btnArticuloBuscar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnLimpiarArticulo = new System.Windows.Forms.Button();
-            this.btnAnteriorArticulo = new System.Windows.Forms.Button();
             this.btnSiguienteArticulo = new System.Windows.Forms.Button();
+            this.btnAnteriorArticulo = new System.Windows.Forms.Button();
+            this.btnLimpiarArticulo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -200,15 +200,15 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // btnLimpiarArticulo
+            // btnSiguienteArticulo
             // 
-            this.btnLimpiarArticulo.Location = new System.Drawing.Point(775, 296);
-            this.btnLimpiarArticulo.Name = "btnLimpiarArticulo";
-            this.btnLimpiarArticulo.Size = new System.Drawing.Size(105, 41);
-            this.btnLimpiarArticulo.TabIndex = 21;
-            this.btnLimpiarArticulo.Text = "Limpiar";
-            this.btnLimpiarArticulo.UseVisualStyleBackColor = true;
-            this.btnLimpiarArticulo.Click += new System.EventHandler(this.btnLimpiarArticulo_Click);
+            this.btnSiguienteArticulo.Location = new System.Drawing.Point(1003, 296);
+            this.btnSiguienteArticulo.Name = "btnSiguienteArticulo";
+            this.btnSiguienteArticulo.Size = new System.Drawing.Size(105, 41);
+            this.btnSiguienteArticulo.TabIndex = 23;
+            this.btnSiguienteArticulo.Text = "Siguiente";
+            this.btnSiguienteArticulo.UseVisualStyleBackColor = true;
+            this.btnSiguienteArticulo.Click += new System.EventHandler(this.btnSiguienteArticulo_Click);
             // 
             // btnAnteriorArticulo
             // 
@@ -220,15 +220,15 @@
             this.btnAnteriorArticulo.UseVisualStyleBackColor = true;
             this.btnAnteriorArticulo.Click += new System.EventHandler(this.btnAnteriorArticulo_Click);
             // 
-            // btnSiguienteArticulo
+            // btnLimpiarArticulo
             // 
-            this.btnSiguienteArticulo.Location = new System.Drawing.Point(1003, 296);
-            this.btnSiguienteArticulo.Name = "btnSiguienteArticulo";
-            this.btnSiguienteArticulo.Size = new System.Drawing.Size(105, 41);
-            this.btnSiguienteArticulo.TabIndex = 23;
-            this.btnSiguienteArticulo.Text = "Siguiente";
-            this.btnSiguienteArticulo.UseVisualStyleBackColor = true;
-            this.btnSiguienteArticulo.Click += new System.EventHandler(this.btnSiguienteArticulo_Click);
+            this.btnLimpiarArticulo.Location = new System.Drawing.Point(775, 296);
+            this.btnLimpiarArticulo.Name = "btnLimpiarArticulo";
+            this.btnLimpiarArticulo.Size = new System.Drawing.Size(105, 41);
+            this.btnLimpiarArticulo.TabIndex = 21;
+            this.btnLimpiarArticulo.Text = "Limpiar";
+            this.btnLimpiarArticulo.UseVisualStyleBackColor = true;
+            this.btnLimpiarArticulo.Click += new System.EventHandler(this.btnLimpiarArticulo_Click);
             // 
             // frmArticulos
             // 
@@ -279,8 +279,8 @@
         private System.Windows.Forms.TextBox txtFiltroArticulo;
         private System.Windows.Forms.Button btnArticuloBuscar;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnLimpiarArticulo;
-        private System.Windows.Forms.Button btnAnteriorArticulo;
         private System.Windows.Forms.Button btnSiguienteArticulo;
+        private System.Windows.Forms.Button btnAnteriorArticulo;
+        private System.Windows.Forms.Button btnLimpiarArticulo;
     }
 }
